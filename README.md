@@ -2,22 +2,21 @@
 
 LinkedIn people and company data for AI agents, over MCP or REST. This repo is the public home and issue tracker for the hosted server `io.veezee/linkedin` on the [official MCP Registry](https://registry.modelcontextprotocol.io). The server is a hosted service; there is nothing to build or run from this repo.
 
-- Endpoint: `https://mcp.veezee.io/mcp` (streamable-http). Legacy HTTP+SSE: `https://mcp.veezee.io/sse`.
-- Free trial: call the `provision` tool. 500 credits, no signup, no card, no key needed for that first call.
+- Endpoint: `https://mcp.veezee.io/linkedin` (streamable-http, LinkedIn only). `https://mcp.veezee.io/all` exposes every platform's tools. `https://mcp.veezee.io/mcp` still resolves too, as a legacy alias (the MCP Registry entry points at it). Legacy HTTP+SSE: `https://mcp.veezee.io/sse`.
+- No key needed to start: every data tool works keyless, under a shared budget of 20 credits per IP per day, recent data only. Buy a key at https://veezee.io/upgrade for a higher budget; it's shown once on the confirmation page.
 - Website and docs: https://veezee.io
 - Found a bug or a gap? [Open an issue](https://github.com/veezeehq/veezee-mcp/issues) or write hello@veezee.io.
 
-## The seven tools
+## The six tools
 
 | tool | what it does |
 |---|---|
-| `provision` | create a free trial account, returns your API key |
 | `resolve_url` | identify a LinkedIn URL |
 | `get_profile` | get a person profile |
 | `search_people` | search people |
 | `get_company` | get a company |
 | `get_posts` | recent posts by a person or company |
-| `get_usage` | check credits and recent charges (free) |
+| `get_usage` | check credits and recent charges (free; needs a key) |
 
 Full tool reference with schemas and credit costs: https://veezee.io/docs
 
@@ -26,13 +25,13 @@ Full tool reference with schemas and credit costs: https://veezee.io/docs
 Claude Code:
 
 ```
-claude mcp add --transport http veezee https://mcp.veezee.io/mcp
+claude mcp add --transport http veezee https://mcp.veezee.io/linkedin
 ```
 
 Codex CLI:
 
 ```
-codex mcp add veezee --url https://mcp.veezee.io/mcp
+codex mcp add veezee --url https://mcp.veezee.io/linkedin
 ```
 
 Cursor (`.cursor/mcp.json` or `~/.cursor/mcp.json`):
@@ -40,7 +39,7 @@ Cursor (`.cursor/mcp.json` or `~/.cursor/mcp.json`):
 ```json
 {
   "mcpServers": {
-    "veezee": { "url": "https://mcp.veezee.io/mcp" }
+    "veezee": { "url": "https://mcp.veezee.io/linkedin" }
   }
 }
 ```
@@ -50,12 +49,12 @@ VS Code (`.vscode/mcp.json`):
 ```json
 {
   "servers": {
-    "veezee": { "type": "http", "url": "https://mcp.veezee.io/mcp" }
+    "veezee": { "type": "http", "url": "https://mcp.veezee.io/linkedin" }
   }
 }
 ```
 
-claude.ai: Settings > Connectors > Add custom connector > `https://mcp.veezee.io/mcp`.
+claude.ai: Settings > Connectors > Add custom connector > `https://mcp.veezee.io/linkedin`.
 
 More clients (Windsurf, Cline, Zed, plain REST), each snippet verified against the client's official docs: https://veezee.io/docs/clients
 
