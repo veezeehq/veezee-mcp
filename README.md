@@ -2,7 +2,7 @@
 
 LinkedIn people and company data for AI agents, over MCP or REST. This repo is the public home and issue tracker for the hosted server `io.veezee/linkedin` on the [official MCP Registry](https://registry.modelcontextprotocol.io). The server is a hosted service; there is nothing to build or run from this repo.
 
-- Endpoint: `https://mcp.veezee.io/linkedin` (streamable-http, LinkedIn only). `https://mcp.veezee.io/all` exposes every platform's tools. `https://mcp.veezee.io/mcp` still resolves too, as a legacy alias (the MCP Registry entry points at it). Legacy HTTP+SSE: `https://mcp.veezee.io/sse`.
+- Endpoint: `https://mcp.veezee.io/linkedin` (streamable-http, LinkedIn only). `https://mcp.veezee.io/all` exposes every platform's tools.
 - No key needed to start: every data tool works keyless, under a shared budget of 20 credits per IP per day, recent data only. Buy a key at https://veezee.io/upgrade for a higher budget; it's shown once on the confirmation page.
 - Website and docs: https://veezee.io
 - Found a bug or a gap? [Open an issue](https://github.com/veezeehq/veezee-mcp/issues) or write hello@veezee.io.
