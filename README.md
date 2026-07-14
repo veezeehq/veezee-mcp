@@ -124,7 +124,7 @@ VS Code (`.vscode/mcp.json`):
 
 claude.ai: Settings > Connectors > Add custom connector > `https://mcp.veezee.io/all` (or a single-platform mount).
 
-Any of the clients above works keyless first, using the `mint_key` tool or the `KEY_REQUIRED` error to self-provision a key as described in Quickstart, then add the `Authorization` header once you have one.
+You can connect any of the clients above before you have a key. It self-provisions one on first contact: use the `mint_key` tool or follow the `KEY_REQUIRED` error, as described in Quickstart, then add the `Authorization` header once you have one.
 
 More clients (Windsurf, Cline, Zed, plain REST), each snippet verified against the client's official docs: https://veezee.io/docs/clients
 
