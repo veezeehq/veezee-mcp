@@ -1,8 +1,8 @@
 # Veezee MCP server
 
-LinkedIn, Reddit, and X (formerly Twitter) data for AI agents, over MCP or REST. This repo is the public home and issue tracker for the hosted servers on the [official MCP Registry](https://registry.modelcontextprotocol.io): `io.veezee/linkedin` (3.0.0), `io.veezee/reddit` (1.0.0), and `io.veezee/x-twitter` (1.0.0). The server is a hosted service; there is nothing to build or run from this repo.
+LinkedIn, Reddit, and X (formerly Twitter) data for AI agents, over MCP or REST. This repo is the public home and issue tracker for the hosted servers on the [official MCP Registry](https://registry.modelcontextprotocol.io): `io.veezee/linkedin` (3.1.0), `io.veezee/reddit` (1.1.0), and `io.veezee/x-twitter` (1.1.0). The server is a hosted service; there is nothing to build or run from this repo.
 
-- No key needed to start: every data tool works keyless, under a shared budget of 20 credits per IP per day across all platforms, recent data only. Buy a key at https://veezee.io/upgrade for a higher budget; it's shown once on the confirmation page.
+- Every call needs a free key, and minting one costs nothing: no signup, no card, no human. See Quickstart below. The free tier is 20 credits per network location (IP) per day across all platforms, cached data, first page only. Paying at https://veezee.io/upgrade credits the same key with a higher budget, realtime freshness, and full pagination.
 - Website and docs: https://veezee.io
 - Found a bug or a gap? [Open an issue](https://github.com/veezeehq/veezee-mcp/issues) or write hello@veezee.io.
 
@@ -56,49 +56,35 @@ Pick a single-platform mount when your agent only needs one platform: a smaller 
 
 | tool | what it does | credits |
 |---|---|---|
-| `get_usage` | check credits and recent charges (needs a key) | 0 |
+| `get_usage` | check credits and recent charges | 0 |
+| `mint_key` | mint a free trial key; only shows up in `tools/list` on a session that has no key yet | 0 |
 
-Any tool call can set `freshness: "realtime"` for +2 credits to force a live fetch instead of cached data (needs a key). Full tool reference with schemas: https://veezee.io/docs
+Any tool call can set `freshness: "realtime"` for +2 credits to force a live fetch instead of cached data. Full tool reference with schemas: https://veezee.io/docs
 
-## Keyless quickstart
+## Quickstart
 
-No signup, no card, no key: the calls below work as-is. One example per platform.
+Every tool call needs a key, and getting one costs nothing. Mint one directly:
 
-LinkedIn — get a person profile:
+```bash
+curl -s -X POST https://api.veezee.io/v1/keys/mint
+```
+
+That returns a `vz_trial_...` key with the same free-tier budget as before: 20 credits per network location per day, cached data, first page only. Drop it into your MCP client config as a bearer header, then reconnect. Example for `/all` (swap in `/linkedin`, `/reddit`, or `/x` for a single-platform mount):
 
 ```json
 {
-  "method": "tools/call",
-  "params": {
-    "name": "linkedin_get_profile",
-    "arguments": { "identifier": "williamhgates" }
+  "mcpServers": {
+    "veezee": {
+      "url": "https://mcp.veezee.io/all",
+      "headers": { "Authorization": "Bearer vz_trial_..." }
+    }
   }
 }
 ```
 
-Reddit — search comments for what people say about a product:
+Don't want to mint a key by hand first? Connect without one. An un-keyed session exposes one extra tool, `mint_key`, so the agent can mint its own key mid-conversation. Any other tool call on an un-keyed session returns a `KEY_REQUIRED` error whose message spells out the same two steps (call `mint_key`, or `POST /v1/keys/mint` directly) plus a `mint_url`. Either route, an agent gets from zero to a working key with no human involved.
 
-```json
-{
-  "method": "tools/call",
-  "params": {
-    "name": "reddit_search",
-    "arguments": { "query": "notion alternative", "type": "comments" }
-  }
-}
-```
-
-X, formerly Twitter — get a profile:
-
-```json
-{
-  "method": "tools/call",
-  "params": {
-    "name": "x_get_profile",
-    "arguments": { "identifier": "nasa" }
-  }
-}
-```
+Paying at https://veezee.io/upgrade credits the same key, trial straight to flex; nothing to reconfigure. Realtime freshness and full pagination come with a paid balance.
 
 ## Install
 
@@ -137,6 +123,8 @@ VS Code (`.vscode/mcp.json`):
 ```
 
 claude.ai: Settings > Connectors > Add custom connector > `https://mcp.veezee.io/all` (or a single-platform mount).
+
+Any of the clients above works keyless first, using the `mint_key` tool or the `KEY_REQUIRED` error to self-provision a key as described in Quickstart, then add the `Authorization` header once you have one.
 
 More clients (Windsurf, Cline, Zed, plain REST), each snippet verified against the client's official docs: https://veezee.io/docs/clients
 
