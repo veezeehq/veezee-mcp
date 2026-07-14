@@ -2,7 +2,7 @@
 
 LinkedIn, Reddit, and X (formerly Twitter) data for AI agents, over MCP or REST. This repo is the public home and issue tracker for the hosted servers on the [official MCP Registry](https://registry.modelcontextprotocol.io): `io.veezee/linkedin` (3.1.0), `io.veezee/reddit` (1.1.0), and `io.veezee/x-twitter` (1.1.0). The server is a hosted service; there is nothing to build or run from this repo.
 
-- Every call needs a free key, and minting one costs nothing: no signup, no card, no human. See Quickstart below. The free tier is 20 credits per network location (IP) per day across all platforms, cached data, first page only. Paying at https://veezee.io/upgrade credits the same key with a higher budget, realtime freshness, and full pagination.
+- Every call needs a free key, and minting one costs nothing: no signup, no card, no human. See Quickstart below. The free tier is 20 credits per IP per day across all platforms, cached data, first page only. Paying at https://veezee.io/upgrade credits the same key with a higher budget, realtime freshness, and full pagination.
 - Website and docs: https://veezee.io
 - Found a bug or a gap? [Open an issue](https://github.com/veezeehq/veezee-mcp/issues) or write hello@veezee.io.
 
@@ -69,7 +69,7 @@ Every tool call needs a key, and getting one costs nothing. Mint one directly:
 curl -s -X POST https://api.veezee.io/v1/keys/mint
 ```
 
-That returns a `vz_trial_...` key with the same free-tier budget as before: 20 credits per network location per day, cached data, first page only. Drop it into your MCP client config as a bearer header, then reconnect. Example for `/all` (swap in `/linkedin`, `/reddit`, or `/x` for a single-platform mount):
+That returns a `vz_trial_...` key with the same free-tier budget as before: 20 credits per IP per day, cached data, first page only. Drop it into your MCP client config as a bearer header, then reconnect. Example for `/all` (swap in `/linkedin`, `/reddit`, or `/x` for a single-platform mount):
 
 ```json
 {
