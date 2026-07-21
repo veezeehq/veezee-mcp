@@ -1,0 +1,21 @@
+{
+  "name": "veezee-mcp",
+  "version": "1.0.0",
+  "description": "Stdio proxy to the hosted Veezee MCP server: real-time LinkedIn, X (Twitter), and Reddit data for AI agents. Self-mints a free key when none is set.",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "veezee-mcp": "bin/veezee-mcp.mjs"
+  },
+  "dependencies": {
+    "mcp-remote": "^0.1.38"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/veezeehq/veezee-mcp.git"
+  },
+  "homepage": "https://veezee.io"
+}

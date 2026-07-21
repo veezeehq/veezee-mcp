@@ -1,10 +1,20 @@
 # Veezee MCP server
 
-LinkedIn, Reddit, and X (formerly Twitter) data for AI agents, over MCP or REST. This repo is the public home and issue tracker for the hosted servers on the [official MCP Registry](https://registry.modelcontextprotocol.io): `io.veezee/linkedin` (3.1.0), `io.veezee/reddit` (1.1.0), and `io.veezee/x-twitter` (1.1.0). The server is a hosted service; there is nothing to build or run from this repo.
+LinkedIn, Reddit, and X (formerly Twitter) data for AI agents, over MCP or REST. This repo is the public home and issue tracker for the hosted servers on the [official MCP Registry](https://registry.modelcontextprotocol.io): `io.veezee/linkedin` (3.1.0), `io.veezee/reddit` (1.1.0), and `io.veezee/x-twitter` (1.1.0). The server is a hosted service; this repo also ships a small stdio proxy (`npx github:veezeehq/veezee-mcp`) for clients that spawn a local command.
 
 - Every call needs a free key, and minting one costs nothing: no signup, no card, no human. See Quickstart below. The free tier is 200 credits per IP per day across all platforms, cached data, first page only. Paying at https://veezee.io/upgrade credits the same key with a higher budget, realtime freshness, and full pagination.
 - Website and docs: https://veezee.io
 - Found a bug or a gap? [Open an issue](https://github.com/veezeehq/veezee-mcp/issues) or write hello@veezee.io.
+
+## Run locally (stdio)
+
+For MCP clients that spawn a local command instead of connecting to a URL:
+
+```
+npx github:veezeehq/veezee-mcp
+```
+
+The proxy connects to `https://mcp.veezee.io/all` and mints a free trial key on first run (no signup). Set `VEEZEE_API_KEY` to reuse one key across runs, and `VEEZEE_MCP_URL` to point at a single-platform mount. Docker: `docker build -t veezee-mcp . && docker run -i veezee-mcp`.
 
 ## Mounts
 
